@@ -1,5 +1,5 @@
 # DRT-Peak-Analysis-
-Automated extraction of resistance (R), capacitance, and peak frequency/relaxation time (τ) from each peak of the DRT curve.
+Automated extraction of polarization resistance (R), capacitance, and peak frequency/relaxation time (τ) from each peak of the DRT curve.
 
 IMPORTANT: This tool is designed to work with outputs from DRTtools.
 Link: https://github.com/ciuccislab/DRTtools
