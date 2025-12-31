@@ -18,3 +18,5 @@ STEPS TO USE:
 
  Developed by Masood Fakouri Hasanabadi
  Note: Any use of this code requires proper citation of the related publication of author Masood Fakouri Hasanabadi.
+
+This repository includes a copy of DRTtools (developed by Ciucci Lab) for user convenience. DRTtools is licensed under the LGPL-3.0 License. Original source: https://github.com/ciuccislab/DRTtools
