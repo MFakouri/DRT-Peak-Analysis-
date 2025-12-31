@@ -1,5 +1,5 @@
 # DRT-Peak-Analysis-
-Automated extraction of R, Tau, Capacitance, and peak frequency from DRTtools distribution curves.
+Automated extraction of resistance (R), capacitance, and peak frequency/relaxation time (τ) from each peak of the DRT curve.
 
 IMPORTANT: This tool is designed to work with outputs from DRTtools.
 Link: https://github.com/ciuccislab/DRTtools
@@ -10,7 +10,6 @@ STEPS TO USE:
 3. Use this module to 'Load a single .fig file' OR a 'folder of .fig files'.
 
  Features:
- - Automated extraction of R, Capacitance, and peak tau/frequency from DRTtools distribution curves. 
  - Extract all Line/Scatter series (XData/YData)
  - Preview curves (only the last loaded file's data is previewed)
  - Save CSV: Creates individual CSV files for the full data (all curves).
