@@ -7,7 +7,7 @@ STEPS TO USE:
 3. Use this module to 'Load a single .fig file' OR a 'folder of .fig files'.
 
  Features:
- - Automated extraction of R, Capacitance, and peak tau/frequency from DRTtools distribution curves. 
+ - Automated extraction of resistance (R), capacitance, and peak frequency/relaxation time (τ) from each peak of the DRT curve. 
  - Extract all Line/Scatter series (XData/YData)
  - Preview curves (only the last loaded file's data is previewed)
  - Save CSV: Creates individual CSV files for the full data (all curves).
@@ -18,3 +18,4 @@ STEPS TO USE:
  Note: Any use of this code requires proper citation of the related publication of author Masood Fakouri Hasanabadi.
 
 This repository includes a copy of DRTtools (developed by Ciucci Lab) for user convenience. DRTtools is licensed under the LGPL-3.0 License. Original source: https://github.com/ciuccislab/DRTtools
+
