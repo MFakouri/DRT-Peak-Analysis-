@@ -1,0 +1,16 @@
+# MATLAB generated files
+*.asv
+*.slxc
+*.mex*
+*.mat
+*.fig
+*.log
+
+# Workspace and History files
+.matlab/
+history.m
+Desktop.ini
+
+# Potential data or result folders (Optional)
+results/
+temp/
