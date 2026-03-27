@@ -6,6 +6,7 @@ Link: https://github.com/ciuccislab/DRTtools
 
 STEPS TO USE:
 1. Perform deconvolution on γ(lnτ)-τ curve in the 'Peak Analysis' section of DRTtools.
+   A modified version of DRTtools is available in the "DRTtools-master_F_Corrected" folder.
 2. Save the resulting figure using 'Export Results' in DRTtools.
 3. Use this module to 'Load a single .fig file' OR a 'folder of .fig files'.
 
