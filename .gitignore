@@ -3,7 +3,6 @@
 *.slxc
 *.mex*
 *.mat
-*.fig
 *.log
 
 # Workspace and History files
