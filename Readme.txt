@@ -2,17 +2,19 @@ IMPORTANT: This tool is designed to work with outputs from DRTtools.
 Link: https://github.com/ciuccislab/DRTtools
 
 STEPS TO USE:
-1. Perform deconvolution on γ(lnτ)-τ curve in the 'Peak Analysis' section of DRTtools.
+1. If needed, use the **File Conversion for DRTtools** utility included in this repository to convert the original output into the format required by DRTtools.
+2. Perform deconvolution on γ(lnτ)-τ curve in the 'Peak Analysis' section of DRTtools.
    A modified version of DRTtools is available in the "DRTtools-master_F_Corrected" folder.
-2. Save the resulting figure using 'Export Results' in DRTtools.
-3. Use this module to 'Load a single .fig file' OR a 'folder of .fig files'.
+3. Save the resulting figure using 'Export Results' in DRTtools.
+4. Use this module to 'Load a single .fig file' OR a 'folder of .fig files'.
 
  Features:
- - Automated extraction of polarization resistance (R), capacitance, and peak frequency/relaxation time (τ) from each peak of the DRT curve. 
- - Extract all Line/Scatter series (XData/YData)
- - Preview curves (only the last loaded file's data is previewed)
- - Save CSV: Creates individual CSV files for the full data (all curves).
- - Save Parameters CSV: Creates CSV files for peak parameters (R, Tau, Capacitance, Frequency).
+- Supports EIS data exported from different instruments, including **Solartron, Autolab, Gamry, and Zahner**.
+- Automated extraction of polarization resistance (R), capacitance, and peak frequency/relaxation time (τ) from each peak of the DRT curve. 
+- Extract all Line/Scatter series (XData/YData)
+- Preview curves (only the last loaded file's data is previewed)
+- Save CSV: Creates individual CSV files for the full data (all curves).
+- Save Parameters CSV: Creates CSV files for peak parameters (R, Tau, Capacitance, Frequency).
 
  Developed by Masood Fakouri Hasanabadi
 
