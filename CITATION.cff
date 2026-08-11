@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+
+message: "If you use this software in your research, please cite it using the metadata below."
+
+title: "DRTPeakAnalysis"
+
+authors:
+  - family-names: "Fakouri Hasanabadi"
+    given-names: "Masood"
+    orcid: "https://orcid.org/0000-0001-6776-4142"
+
+version: "v2.0.0"
+
+date-released: "2026-08-11"
+
+repository-code: "https://github.com/MFakouri/DRT-Peak-Analysis-.git"
+
+keywords:
+  - DRT
+  - electrochemical impedance spectroscopy
+  - peak analysis
+  - MATLAB
