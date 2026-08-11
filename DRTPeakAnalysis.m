@@ -130,10 +130,10 @@ function fig2csv_gui
         
         % --- START MODIFICATION for summary table ---
         if height(summary) > 0
-            % Calculate corrected R_Ohm values for display
-            summary.corrected_R_Ohm = summary.R_Ohm * R_corr_ratio;
+            % Calculate R_Ohm values for display
+            summary.R_Ohm = summary.Area_Ohm * R_corr_ratio;
             % Select and reorder columns for display (keeping original R_Ohm and adding corrected)
-            summaryDisplay = summary(:, {'ID','Series_Name','R_Ohm','corrected_R_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'});
+            summaryDisplay = summary(:, {'ID','Series_Name','Area_Ohm','R_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'});
             app.summary = summaryDisplay; % Use the enhanced table for UI
         else
             app.summary = table();
@@ -163,12 +163,12 @@ function fig2csv_gui
             app.summary.ID = (1:height(app.summary)).'; 
             
             % 2. Prepare data for display
-            % Updated to include corrected_R_Ohm column
+            % Updated to include R_Ohm column
             displayTableData = cell(height(app.summary), width(app.summary));
             displayTableData(:, 1) = num2cell(app.summary.ID);
             displayTableData(:, 2) = cellstr(app.summary.Series_Name);
-            % Updated numeric columns to include 'corrected_R_Ohm'
-            numericCols = {'R_Ohm', 'corrected_R_Ohm', 'Tau_s', 'Capacitance_F', 'Frequency_Hz', 'FWHM_lnTau'};
+            % Updated numeric columns to include 'R_Ohm'
+            numericCols = {'Area_Ohm', 'R_Ohm', 'Tau_s', 'Capacitance_F', 'Frequency_Hz', 'FWHM_lnTau'};
             
             for colIdx = 1:length(numericCols)
                 varName = numericCols{colIdx};
@@ -178,9 +178,9 @@ function fig2csv_gui
             
             app.tbl.Data = displayTableData;
             % Update column names for display
-            colNames = {'ID','Series_Name','R_Ohm','corrected R_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'};
+            colNames = {'ID','Series_Name','Area_Ohm','R_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'};
             app.tbl.ColumnName = colNames;
-            app.tbl.ColumnWidth = {'auto','auto','auto','auto','auto','auto','auto','auto'}; % Added FWHM column
+            app.tbl.ColumnWidth = {'auto','auto','auto','auto','auto','auto','auto','auto'}; % Added one 'auto'
             app.btnSave.Enable = 'on';
             app.btnSaveParams.Enable = 'on';
         else
@@ -291,15 +291,15 @@ function fig2csv_gui
             fileStruct = app.fileData{i};
             
             % --- START MODIFICATION to get summary for saving ---
-            % Recompute the summary table with the corrected R_Ohm values for saving
+            % Recompute the summary table with the R_Ohm values for saving
             [fullSummary, R_corr_ratio] = computePeakSummary(fileStruct.series, true);
             
             if height(fullSummary) > 0
                 % 1. Get the current summary table
                 summaryTable = fullSummary;
                 
-                % 2. Calculate the corrected R_Ohm and add to the table
-                summaryTable.corrected_R_Ohm = summaryTable.R_Ohm * R_corr_ratio;
+                % 2. Calculate the R_Ohm and add to the table
+                summaryTable.R_Ohm = summaryTable.Area_Ohm * R_corr_ratio;
                 
                 % 3. Sort the table by Frequency_Hz (high to low)
                 summaryTable = sortrows(summaryTable, 'Frequency_Hz', 'descend');
@@ -307,21 +307,21 @@ function fig2csv_gui
                 % 4. Re-index the 'ID' column after sorting (for clarity in the file)
                 summaryTable.ID = (1:height(summaryTable)).';
                 
-                % 5. Reorder columns to place corrected R_Ohm next to R_Ohm
-                summaryTable = summaryTable(:, {'ID','Series_Name','R_Ohm','corrected_R_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'});
+                % 5. Reorder columns to place R_Ohm next to R_Ohm
+                summaryTable = summaryTable(:, {'ID','Series_Name','Area_Ohm','R_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'});
                 
                 % --- START NEW MODIFICATION: Add Total Row ---
                 % Calculate Sums
+                sum_Area_Ohm = sum(summaryTable.Area_Ohm, 'omitnan');
                 sum_R_Ohm = sum(summaryTable.R_Ohm, 'omitnan');
-                sum_corrected_R_Ohm = sum(summaryTable.corrected_R_Ohm, 'omitnan');
                 
                 % Create the Total row
                 T_total = table(height(summaryTable) + 1, ...
                                 "Total Sum", ...
+                                sum_Area_Ohm, ...
                                 sum_R_Ohm, ...
-                                sum_corrected_R_Ohm, ...
                                 NaN, NaN, NaN, NaN, ...
-                                'VariableNames', {'ID','Series_Name','R_Ohm','corrected_R_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'});
+                                'VariableNames', {'ID','Series_Name','Area_Ohm','R_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'});
 
                 % Append the Total row
                 summaryTable = [summaryTable; T_total];
@@ -448,7 +448,7 @@ function [T, R_correction_ratio] = computePeakSummary(seriesCell, ignoreFirst)
     n = max(0, nTot - (startIdx-1));
     ID = (1:n).';
     Series_Name = strings(n,1);
-    R_Ohm = nan(n,1);
+    Area_Ohm = nan(n,1);
     Tau_s = nan(n,1);
     Cap_F = nan(n,1);
     Freq_Hz = nan(n,1);
@@ -470,27 +470,29 @@ function [T, R_correction_ratio] = computePeakSummary(seriesCell, ignoreFirst)
             [xs, idx] = sort(xi); % Need to sort for peak finding
             ys = yi(idx);
             
-            % R_Ohm calculation is done outside the loop; just assign it.
-            R_Ohm(row) = R; 
+            % Area_Ohm calculation is done outside the loop; just assign it.
+            Area_Ohm(row) = R; 
             
             % Peak tip location (tau)
-            [peakVal, imax] = max(ys);
+            [~, imax] = max(ys);
             tau_pk = xs(imax);
             Tau_s(row) = tau_pk;
             
             % FWHM on the ln(tau) axis
-            % Find half-maximum crossings on both sides of the peak and
-            % linearly interpolate the crossing positions in ln(tau).
+            % Find the half-maximum crossings on both sides of the peak,
+            % interpolate their positions in ln(tau), then calculate:
+            % FWHM_lnTau = ln(tau_right) - ln(tau_left)
+            peakVal = ys(imax);
             if isfinite(peakVal) && peakVal > 0
                 halfMax = peakVal / 2;
                 ln_xs = log(xs);
-                
+
                 iLeft = find(ys(1:imax) <= halfMax, 1, 'last');
                 iRightRel = find(ys(imax:end) <= halfMax, 1, 'first');
-                
+
                 if ~isempty(iLeft) && ~isempty(iRightRel)
                     iRight = imax + iRightRel - 1;
-                    
+
                     if iLeft < imax && iRight > imax
                         % Left half-maximum crossing
                         y1 = ys(iLeft);
@@ -501,7 +503,7 @@ function [T, R_correction_ratio] = computePeakSummary(seriesCell, ignoreFirst)
                         else
                             lnTauLeft = ln_xs(iLeft);
                         end
-                        
+
                         % Right half-maximum crossing
                         y1 = ys(iRight - 1);
                         y2 = ys(iRight);
@@ -511,7 +513,7 @@ function [T, R_correction_ratio] = computePeakSummary(seriesCell, ignoreFirst)
                         else
                             lnTauRight = ln_xs(iRight);
                         end
-                        
+
                         FWHM_lnTau(row) = lnTauRight - lnTauLeft;
                     end
                 end
@@ -522,13 +524,14 @@ function [T, R_correction_ratio] = computePeakSummary(seriesCell, ignoreFirst)
                 Freq_Hz(row) = 1/(2*pi*tau_pk);
             end
             if isfinite(R) && R ~= 0
-                Cap_F(row) = tau_pk / R;
+                R_corr = R * R_correction_ratio;
+                Cap_F(row) = tau_pk / R_corr;
             end
         end
     end
     
-    % T still contains the UNCORRECTED R_Ohm values for now, but 
+    % T still contains the Area_Ohm values for now, but 
     % R_correction_ratio is returned to be used elsewhere.
-    T = table(ID, Series_Name, R_Ohm, Tau_s, Cap_F, Freq_Hz, FWHM_lnTau, ...
-              'VariableNames', {'ID','Series_Name','R_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'});
+    T = table(ID, Series_Name, Area_Ohm, Tau_s, Cap_F, Freq_Hz, FWHM_lnTau, ...
+              'VariableNames', {'ID','Series_Name','Area_Ohm','Tau_s','Capacitance_F','Frequency_Hz','FWHM_lnTau'});
 end
