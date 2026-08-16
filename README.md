@@ -1,23 +1,41 @@
-# DRT-Peak-Analysis-
-Automated extraction of polarization resistance (R), capacitance, and peak frequency/relaxation time (τ) from each peak of the DRT curve.
+# DRT Peak Analysis
 
-IMPORTANT: This tool is designed to work with outputs from DRTtools.
-Link: https://github.com/ciuccislab/DRTtools
+An integrated MATLAB GUI for EIS data import, Distribution of Relaxation Times (DRT) analysis, peak deconvolution, and automated extraction of peak parameters.
+This repository provides an extended and modified version of DRTtools in which data conversion, DRT analysis, peak analysis, and parameter export are integrated into a single GUI.
 
-STEPS TO USE:
-1. If needed, use the **File Conversion for DRTtools** utility included in this repository to convert the original output into the format required by DRTtools.
-2. Perform deconvolution on γ(lnτ)-τ curve in the 'Peak Analysis' section of DRTtools. A modified version of DRTtools is available in the "DRTtools-master_F_Corrected" folder.
-4. Save the resulting figure using 'Export Results' in DRTtools.
-5. Use this module to 'Load a single .fig file' OR a 'folder of .fig files'.
+## Main Features
+- Direct import of EIS data exported from different instruments, including Solartron, Autolab, Gamry, and Zahner.
+- Automatic conversion and standardization of imported EIS files for use in DRTtools.
+- Optional active-area correction for impedance data reported in Ω.
+- Direct use of data already normalized in Ω·cm² without additional area correction.
+- DRT calculation and visualization within the same GUI.
+- Peak deconvolution directly from the DRT curve.
+- Automated extraction of the following parameters for each DRT peak:
+  - Polarization resistance (R)
+  - Capacitance
+  - Relaxation time (τ)
+  - Peak frequency
+  - FWHM (Full Width at Half Maximum)
+- Automatic export of the peak parameters to a CSV file.
+- Automatic saving of the resulting MATLAB figure.
 
- Features:
- - Supports EIS data exported from different instruments, including **Solartron, Autolab, Gamry, and Zahner**.
- - Extract all Line/Scatter series (XData/YData)
- - Preview curves (only the last loaded file's data is previewed)
- - Save CSV: Creates individual CSV files for the full data (all curves).
- - Save Parameters CSV: Creates CSV files for peak parameters (R, Tau, Capacitance, Frequency).
+## Original DRTtools
+This software is based on and extends the original **DRTtools** MATLAB toolbox developed by the Ciucci Lab.
+Original DRTtools repository:
+https://github.com/ciuccislab/DRTtools
+DRTtools is distributed under the MIT License.
+Users are encouraged to cite the original DRTtools publication:
+T. H. Wan, M. Saccoccio, C. Chen, and F. Ciucci,
+“Influence of the discretization methods on the distribution of relaxation times deconvolution: implementing radial basis functions with DRTtools,”
+Electrochimica Acta, vol. 184, pp. 483–499, 2015.
+https://doi.org/10.1016/j.electacta.2015.09.097
 
- Developed by Masood Fakouri Hasanabadi
- Note: Any use of this code requires proper citation of the related publication of author Masood Fakouri Hasanabadi.
+## Contact and Citation
+Developed and modified by:
+**Masood Fakouri Hasanabadi**
+Email: fakourih@ualberta.ca
+If you use this software in your research, please cite this GitHub repository using the **“Cite this repository”** option available on GitHub:
+https://github.com/MFakouri/DRT-Peak-Analysis-
 
-This repository includes a copy of DRTtools (developed by Ciucci Lab) for user convenience. DRTtools is licensed under the LGPL-3.0 License. Original source: https://github.com/ciuccislab/DRTtools
+Please cite the software in any publications or presentations in which it is used.
+Users should also cite the original DRTtools publication listed above when appropriate.
