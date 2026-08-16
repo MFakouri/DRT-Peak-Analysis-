@@ -1911,33 +1911,6 @@ function exportPeakAnalysisCSVs(figFullPath, outputFolder, originalInputName)
     end
 
 
-    % ---------------------------------------------------------
-    % Compute correction ratio exactly as DRTPeakAnalysis
-    % ---------------------------------------------------------
-    [~, R_correction_ratio] = ...
-        computePeakSummary(series, true);
-
-
-    % ====================================================================
-    % SAVE FULL DATA CSV
-    % ====================================================================
-
-    [M, headers] = ...
-        buildPaddedMatrix(series, R_correction_ratio);
-
-    T = array2table( ...
-        M, ...
-        'VariableNames', ...
-        matlab.lang.makeValidName(headers));
-
-
-    dataFileName = fullfile( ...
-        outputFolder, ...
-        [originalInputName ' data.csv']);
-
-
-    writetable(T, dataFileName);
-
 
     % ====================================================================
     % SAVE PARAMETERS CSV
