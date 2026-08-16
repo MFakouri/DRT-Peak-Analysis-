@@ -800,7 +800,7 @@ function Magnitude_Callback(hObject, eventdata, handles)
     ylabel(handles.axes_panel_drt,'$|Z|$','Interpreter', 'Latex','Fontsize',24);
     
     set(gca,'FontSize',20)
-    set(gca,'xscale','log','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse', 'xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
     hold off
     % axis equal
 
@@ -840,7 +840,7 @@ function Phase_Callback(hObject, eventdata, handles)
     ylabel(handles.axes_panel_drt,'angle/$^{\circ}$','Interpreter', 'Latex','Fontsize',24);
     
     set(gca,'FontSize',20)
-    set(gca,'xscale','log','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
     
     hold off
 
@@ -880,7 +880,7 @@ function Re_data_Callback(hObject, eventdata, handles)
 
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24);
     ylabel(handles.axes_panel_drt,'$Z^{\prime}$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
     hold off
     
 guidata(hObject,handles)
@@ -919,7 +919,7 @@ function Im_data_Callback(hObject, eventdata, handles)
 
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24);
     ylabel(handles.axes_panel_drt,'$-Z^{\prime\prime}$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
     hold off
     
 guidata(hObject,handles)
@@ -952,7 +952,7 @@ function Residual_Re_Callback(hObject, eventdata, handles)
     end
 
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
 %   Ensuring symmetric y_axis
     ylim([-1.1*y_max 1.1*y_max])
     hold off
@@ -989,7 +989,7 @@ function Residual_Im_Callback(hObject, eventdata, handles)
 
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24);
 
-    set(gca,'xscale','log','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
 %   Ensuring symmetric y_axis
     ylim([-1.1*y_max 1.1*y_max])
     hold off
@@ -1073,7 +1073,7 @@ function handles = Gamma_Tau_Callback(hObject, eventdata, handles)
 %   adding labels
     xlabel(handles.axes_panel_drt,'$\tau/s$', 'Interpreter', 'Latex','Fontsize',24)
     ylabel(handles.axes_panel_drt,'$\gamma(\ln\tau)/\Omega$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','xlim',[1./(2*pi*handles.freq_0(1)), 1./(2*pi*handles.freq_0(end))],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','xlim',[1./(2*pi*handles.freq_0(1)), 1./(2*pi*handles.freq_0(end))],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
     hold off
     
 guidata(hObject,handles)
@@ -1136,7 +1136,7 @@ function handles = Gamma_Freq_Callback(hObject, eventdata, handles)
 %   adding labels
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24)
     ylabel(handles.axes_panel_drt,'$\gamma(\ln f)/\Omega$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','xlim',[handles.freq_0(end), handles.freq_0(1)],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
     hold off
     
 guidata(hObject,handles)
@@ -1197,7 +1197,7 @@ function handles = G_Tau_Callback(hObject, eventdata, handles)
 %   adding labels
     xlabel(handles.axes_panel_drt,'$\tau/s$', 'Interpreter', 'Latex','Fontsize',24)
     ylabel(handles.axes_panel_drt,'$g(\tau)/(\Omega/\rm s)$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','xlim',[1./(2*pi*handles.freq_0(1)), 1./(2*pi*handles.freq_0(end))],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','xlim',[1./(2*pi*handles.freq_0(1)), 1./(2*pi*handles.freq_0(end))],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
     hold off
     
 guidata(hObject,handles)
@@ -1258,7 +1258,7 @@ function handles = G_Freq_Callback(hObject, eventdata, handles)
 %   adding labels
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24)
     ylabel(handles.axes_panel_drt,'$g(f)/(\Omega/\rm s)$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','xlim',[handles.freq_0(end), handles.freq_0(1)],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:2:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
     hold off
     
 guidata(hObject,handles)
