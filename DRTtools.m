@@ -95,16 +95,20 @@ function import1_OpeningFcn(hObject, eventdata, handles, varargin)
     handles.method_tag = 'none'; 
     handles.data_exist = false;
 
-    % Move all plots slightly to the right
+    % Move all plots slightly to the right and up
     oldUnits = get(handles.axes_panel_drt,'Units');
     set(handles.axes_panel_drt,'Units','normalized');
 
     pos = get(handles.axes_panel_drt,'Position');
 
-    shiftAmount = 0.03;
+    shiftAmount = 0.06;
 
+    % Shift right
     pos(1) = pos(1) + shiftAmount;
     pos(3) = pos(3) - shiftAmount;
+
+    % Shift up
+    pos(2) = pos(2) + 0.015;
 
     set(handles.axes_panel_drt,'Position',pos);
     set(handles.axes_panel_drt,'Units',oldUnits);
@@ -814,7 +818,7 @@ function Magnitude_Callback(hObject, eventdata, handles)
     ylabel(handles.axes_panel_drt,'$|Z|/(\Omega\,\mathrm{cm}^2)$','Interpreter', 'Latex','Fontsize',24);
     
     set(gca,'FontSize',20)
-    set(gca,'xscale','log','XDir','reverse', 'xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse', 'xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
     hold off
     % axis equal
 
@@ -854,7 +858,7 @@ function Phase_Callback(hObject, eventdata, handles)
     ylabel(handles.axes_panel_drt,'angle/$^{\circ}$','Interpreter', 'Latex','Fontsize',24);
     
     set(gca,'FontSize',20)
-    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
     
     hold off
 
@@ -894,7 +898,7 @@ function Re_data_Callback(hObject, eventdata, handles)
 
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24);
     ylabel(handles.axes_panel_drt,'$Z^{\prime}/(\Omega\,\mathrm{cm}^2)$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
     hold off
     
 guidata(hObject,handles)
@@ -933,7 +937,7 @@ function Im_data_Callback(hObject, eventdata, handles)
 
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24);
     ylabel(handles.axes_panel_drt,'$-Z^{\prime\prime}/(\Omega\,\mathrm{cm}^2)$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
     hold off
     
 guidata(hObject,handles)
@@ -958,15 +962,22 @@ function Residual_Re_Callback(hObject, eventdata, handles)
         y_max = max(3*handles.band_re_agm);
 
     else
-        plot(handles.freq, handles.res_re,'or', 'MarkerSize', 4, 'MarkerFaceColor', 'r');
-        ylabel(handles.axes_panel_drt,'$(Z^{\prime}_{\rm DRT}-Z^{\prime}_{\rm exp})/(\Omega\,\mathrm{cm}^2)$','Interpreter', 'Latex','Fontsize',24);
-        
-        y_max = max(abs(handles.res_re));
-        
+    % Normalized percentage residual for GUI display only
+    Z_exp_mod = abs(handles.Z_exp);
+    residual_re_percent = (handles.res_re ./ Z_exp_mod) * 100;
+
+    plot(handles.freq, residual_re_percent, 'or', ...
+    'MarkerSize', 4, 'MarkerFaceColor', 'r');
+
+    ylabel(handles.axes_panel_drt, ...
+    '$Residual\ Z^{\prime}\ (\%)$', ...
+    'Interpreter', 'Latex', 'Fontsize', 24);
+
+    y_max = max(abs(residual_re_percent));
     end
 
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
 %   Ensuring symmetric y_axis
     ylim([-1.1*y_max 1.1*y_max])
     hold off
@@ -993,17 +1004,23 @@ function Residual_Im_Callback(hObject, eventdata, handles)
         y_max = max(3*handles.band_im_agm);
 
     else
-        plot(handles.freq,handles.res_im,'or', 'MarkerSize', 4, 'MarkerFaceColor', 'r');
-        hold on
-        ylabel(handles.axes_panel_drt,'$(Z^{\prime\prime}_{\rm DRT}-Z^{\prime\prime}_{\rm exp})/(\Omega\,\mathrm{cm}^2)$','Interpreter', 'Latex','Fontsize',24);
+    % Normalized percentage residual for GUI display only
+    Z_exp_mod = abs(handles.Z_exp);
+    residual_im_percent = (handles.res_im ./ Z_exp_mod) * 100;
 
-        y_max = max(abs(handles.res_im));
-        
+    plot(handles.freq, residual_im_percent, 'or', ...
+    'MarkerSize', 4, 'MarkerFaceColor', 'r');
+
+    ylabel(handles.axes_panel_drt, ...
+    '$Residual\ Z^{\prime\prime}\ (\%)$', ...
+    'Interpreter', 'Latex', 'Fontsize', 24);
+
+    y_max = max(abs(residual_im_percent));
     end
 
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24);
 
-    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
 %   Ensuring symmetric y_axis
     ylim([-1.1*y_max 1.1*y_max])
     hold off
@@ -1087,7 +1104,7 @@ function handles = Gamma_Tau_Callback(hObject, eventdata, handles)
 %   adding labels
     xlabel(handles.axes_panel_drt,'$\tau/s$', 'Interpreter', 'Latex','Fontsize',24)
     ylabel(handles.axes_panel_drt,'$\gamma(\ln\tau)/(\Omega\,\mathrm{cm}^2)$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','xlim',[1./(2*pi*handles.freq_0(1)), 1./(2*pi*handles.freq_0(end))],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','xlim',[1./(2*pi*handles.freq_0(1)), 1./(2*pi*handles.freq_0(end))],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
     hold off
     
 guidata(hObject,handles)
@@ -1150,7 +1167,7 @@ function handles = Gamma_Freq_Callback(hObject, eventdata, handles)
 %   adding labels
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24)
     ylabel(handles.axes_panel_drt,'$\gamma(\ln f)/(\Omega\,\mathrm{cm}^2)$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
     hold off
     
 guidata(hObject,handles)
@@ -1211,7 +1228,7 @@ function handles = G_Tau_Callback(hObject, eventdata, handles)
 %   adding labels
     xlabel(handles.axes_panel_drt,'$\tau/s$', 'Interpreter', 'Latex','Fontsize',24)
     ylabel(handles.axes_panel_drt,'$g(\tau)/(\Omega\,\mathrm{cm}^2/\mathrm{s})$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','xlim',[1./(2*pi*handles.freq_0(1)), 1./(2*pi*handles.freq_0(end))],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','xlim',[1./(2*pi*handles.freq_0(1)), 1./(2*pi*handles.freq_0(end))],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
     hold off
     
 guidata(hObject,handles)
@@ -1272,7 +1289,7 @@ function handles = G_Freq_Callback(hObject, eventdata, handles)
 %   adding labels
     xlabel(handles.axes_panel_drt,'$f$/Hz', 'Interpreter', 'Latex','Fontsize',24)
     ylabel(handles.axes_panel_drt,'$g(f)/(\Omega\,\mathrm{cm}^2/\mathrm{s})$','Interpreter', 'Latex','Fontsize',24);
-    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex')
+    set(gca,'xscale','log','XDir','reverse','xlim',[handles.freq_0(end), handles.freq_0(1)],'ylim',[y_min, 1.1*y_max],'Fontsize',20,'xtick',10.^[-10:1:10],'TickLabelInterpreter','latex','TickDir','both')
     hold off
     
 guidata(hObject,handles)
