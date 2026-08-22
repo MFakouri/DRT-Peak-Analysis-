@@ -76,11 +76,12 @@ function import1_OpeningFcn(hObject, eventdata, handles, varargin)
     handles.output = hObject;
     set(handles.dis_button,'Value',1)
     set(handles.plot_pop,'Value',1)
-    set(handles.derivative,'Value',1)
+    set(handles.DRT_type,'Value',2)      % gamma vs frequency
+    set(handles.derivative,'Value',2)
     set(handles.shape,'Value',1)
     set(handles.value,'String','1E-3')
     set(handles.coef,'String','0.5')
-    set(handles.inductance,'Value',1)
+    set(handles.inductance,'Value',2)
     set(handles.panel_drt, 'Visible', 'on');
     set(handles.running_signal, 'Visible', 'off');
 
@@ -89,7 +90,7 @@ function import1_OpeningFcn(hObject, eventdata, handles, varargin)
     handles.lambda = 1e-3;
     handles.coeff = 0.5;
     handles.shape_control = 'FWHM Coefficient';
-    handles.der_used = '1st-order';    
+    handles.der_used = '2nd-order';    
 %   method_tag: 'none': havnt done any computation, 'simple': simple DRT,
 %               'credit': Bayesian run, 'BHT': Bayesian Hibert run
     handles.method_tag = 'none'; 
@@ -274,8 +275,25 @@ function handles = inductance_Callback(hObject, eventdata, handles)
     f_max_input = max(handles.freq_0);
 f_min_input = min(handles.freq_0);
 
-handles.taumin = log10(1/(2*pi*f_max_input))-0.5;
-handles.taumax = log10(1/(2*pi*f_min_input))+0.5;
+% Base log10(tau) range from experimental frequencies
+taumin_base = log10(1/(2*pi*f_max_input));
+taumax_base = log10(1/(2*pi*f_min_input));
+
+% Normal extension beyond experimental range
+base_margin = 0.5;
+
+% Peak analysis uses p_init(2) = 1 and bounds based on ln(tau).
+% Therefore the tau grid must at least include ln(tau) = 1.
+target_log10_tau = 1/log(10);   % = 0.4343
+
+% Extend each side only as much as necessary
+handles.taumin = min( ...
+    taumin_base - base_margin, ...
+    target_log10_tau - 0.1);
+
+handles.taumax = max( ...
+    taumax_base + base_margin, ...
+    target_log10_tau + 0.1);
 
 handles.freq_fine = logspace( ...
     -handles.taumin, ...
