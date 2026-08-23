@@ -754,7 +754,7 @@ function peak_analysis_Callback(hObject, eventdata, handles)
         R_0 = handles.p_result(1,i);
         mu_log_tau = handles.p_result(2,i);
         sigma = handles.p_result(3,i);
-        handles.gamma_gauss_mat(:,i) = R_0 * exp(-(log(1./handles.freq_fine) - mu_log_tau).^2./(2*sigma)^2);% perhaps use a gamma_mat
+        handles.gamma_gauss_mat(:,i) = R_0 * exp(-(log(1./handles.freq_fine) - mu_log_tau).^2./(2*sigma^2));% perhaps use a gamma_mat
         handles.g_gauss_mat(:,i) = handles.gamma_gauss_mat(:,i).*handles.freq_fine;
     end    
     
