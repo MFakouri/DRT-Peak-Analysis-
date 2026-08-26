@@ -18,6 +18,7 @@ This repository provides an extended and modified version of DRTtools in which d
   - FWHM (Full Width at Half Maximum)
 - Automatic export of the peak parameters to a CSV file.
 - Automatic saving of the resulting MATLAB figure.
+- Standalone Windows executable available; no Python or MATLAB installation or additional configuration required. Download exe file here: https://github.com/MFakouri/pyDRT-Peak-Analysis-/tree/master/Windows-Executable
 
 ## Original DRTtools
 This software is based on and extends the original **DRTtools** MATLAB toolbox developed by the Ciucci Lab.
