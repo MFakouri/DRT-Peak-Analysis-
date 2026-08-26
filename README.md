@@ -1,12 +1,24 @@
-# pyDRT Peak Analysis
+#
 
-An integrated Python GUI for EIS data import, Distribution of Relaxation Times (DRT) analysis, peak deconvolution, and automated extraction of peak parameters.
-This repository provides an extended and modified version of pyDRTtools in which data conversion, DRT analysis, peak analysis, and parameter export are integrated into a single GUI.
+[svg](https://github.com/MFakouri/DRT-Peak-Analysis-#drt-peak-analysis)
+An integrated MATLAB GUI for EIS data import, Distribution
+
+of Relaxation Times (DRT) analysis, peak deconvolution, and automated 
+
+extraction of peak parameters.
+
+This repository provides an extended and modified version of DRTtools in
+
+which data conversion, DRT analysis, peak analysis, and parameter 
+
+export are integrated into a single GUI.
 
 ## Main Features
 
+[svg](https://github.com/MFakouri/DRT-Peak-Analysis-#main-features)
+
 - Direct import of EIS data exported from different instruments, including Solartron, Autolab, Gamry, and Zahner.
-- Automatic conversion and standardization of imported EIS files for use in pyDRTtools.
+- Automatic conversion and standardization of imported EIS files for use in DRTtools.
 - Optional active-area correction for impedance data reported in Ω.
 - Direct use of data already normalized in Ω·cm² without additional area correction.
 - DRT calculation and visualization within the same GUI.
@@ -18,35 +30,45 @@ This repository provides an extended and modified version of pyDRTtools in which
   - Peak frequency
   - FWHM (Full Width at Half Maximum)
 - Automatic export of the peak parameters to a CSV file.
-- Automatic saving of the resulting figure.
+- Automatic saving of the resulting MATLAB figure.
 
-## Original pyDRTtools
+## Original DRTtools
 
-This software is based on and extends the original **pyDRTtools** Python toolbox developed by the Ciucci Lab.
+[svg](https://github.com/MFakouri/DRT-Peak-Analysis-#original-drttools)
+This software is based on and extends the original **DRTtools** MATLAB toolbox developed by the Ciucci Lab.
 
-Original pyDRTtools repository:
-https://github.com/ciuccislab/pyDRTtools
+Original DRTtools repository:
 
-pyDRTtools is distributed under the MIT License.
+https://github.com/ciuccislab/DRTtools
 
-Users are encouraged to cite the primary DRTtools/pyDRTtools reference:
+DRTtools is distributed under the MIT License.
+
+Users are encouraged to cite the original DRTtools publication:
 
 T. H. Wan, M. Saccoccio, C. Chen, and F. Ciucci,
-“Influence of the discretization methods on the distribution of relaxation times deconvolution: implementing radial basis functions with DRTtools,”
-*Electrochimica Acta*, vol. 184, pp. 483–499, 2015.
 
-https://doi.org/10.1016/j.electacta.2015.09.097
+“Influence of the discretization methods on the distribution of 
+
+relaxation times deconvolution: implementing radial basis functions with
+
+DRTtools,”
+
+Electrochimica Acta, vol. 184, pp. 483–499, 2015.
+
+[https://doi.org/10.1016/j.electacta.2015.09.097](https://doi.org/10.1016/j.electacta.2015.09.097)
 
 ## Contact and Citation
 
+[svg](https://github.com/MFakouri/DRT-Peak-Analysis-#contact-and-citation)
 Developed and modified by:
 
-**Masood Fakouri Hasanabadi**  
-Email: [fakourih@ualberta.ca](mailto:fakourih@ualberta.ca)
+**Masood Fakouri Hasanabadi**
+
+Email: [fakourih@ualberta.ca](mailto\:fakourih@ualberta.ca)
 
 If you use this software in your research, please cite this GitHub repository using the **“Cite this repository”** option available on GitHub:
 
-https://github.com/MFakouri/pyDRT-Peak-Analysis-
-
+https://github.com/MFakouri/DRT-Peak-Analysis-
 Please cite the software in any publications or presentations in which it is used.
-Users should also cite the original pyDRTtools/DRTtools publication listed above when appropriate.
+
+Users should also cite the original DRTtools publication listed above when appropriate.
