@@ -24,7 +24,7 @@ This repository provides an extended and modified version of pyDRTtools in which
 
 This software is based on and extends the original **DRTtools** toolbox developed by the Ciucci Lab.
 
-Original pyDRTtools repository:
+Original DRTtools repository:
 https://github.com/ciuccislab/DRTtools
 
 pyDRTtools is distributed under the MIT License.
