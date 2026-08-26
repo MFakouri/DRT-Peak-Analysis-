@@ -2,7 +2,19 @@
 
 An integrated MATLAB GUI for EIS data import, Distribution of Relaxation Times (DRT) analysis, peak deconvolution, and automated extraction of peak parameters.
 This repository provides an extended and modified version of pyDRTtools in which data conversion, DRT analysis, peak analysis, and parameter export are integrated into a single GUI.
+<p align="center">
+  <img src="docs/Nyquist.png" width="430">
+</p>
+<p align="center">
+  Nyquist plot.
+</p>
 
+<p align="center">
+  <img src="docs/DRT-Peaks.png" width="600">
+</p>
+<p align="center">
+  DRT peaks.
+</p>
 ## Main Features
 
 - Direct import of EIS data exported from different instruments, including Solartron, Autolab, Gamry, and Zahner.
