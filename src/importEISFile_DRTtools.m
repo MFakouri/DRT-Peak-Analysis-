@@ -28,7 +28,15 @@ function [data_from_file, cancelled] = importEISFile_DRTtools(fullFileName)
                 storedStructure.Z_prime, ...
                 storedStructure.Z_double_prime];
 
-        case {'.txt','.csv','.z','.dat'}
+        case '.mpr'
+
+            data_from_file = readBioLogicMPR(fullFileName);
+
+        case '.ism'
+
+            data_from_file = readZahnerISM(fullFileName);
+
+        case {'.txt','.csv','.z','.dat','.dta'}
 
             try
                 % First try the new intelligent column detector
