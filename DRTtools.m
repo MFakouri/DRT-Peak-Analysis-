@@ -136,8 +136,8 @@ function import_button_Callback(hObject, eventdata, handles)
     % Select EIS file
     % ---------------------------------------------------------
     [baseFileName, folder] = uigetfile( ...
-        {'*.mat;*.txt;*.csv;*.z;*.dat', ...
-         'EIS data files (*.mat, *.txt, *.csv, *.z, *.dat)'}, ...
+        {'*.mat;*.txt;*.csv;*.z;*.dat;*.dta;*.mpr;*.ism', ...
+         'EIS data files (*.mat, *.txt, *.csv, *.z, *.dat, *.dta, *.mpr, *.ism)'}, ...
         'Select a file');
 
     if isequal(baseFileName,0)
@@ -713,11 +713,13 @@ function peak_analysis_Callback(hObject, eventdata, handles)
         options = optimset('algorithm','active-set','Display','off','TolFun',1e-15,'TolX',1e-15,'MaxFunEvals', 1E5, 'MaxIter', 1E5);
         p_fit = fmincon(@(p) sq_residual_fct(p), p_init, [], [], [], [], lb, ub, [], options);
 
-        % compute the DRT difference between the ridge DRT and peak DRT
-        abs_residual = abs(gauss_fct(handles.tau_fine, p_ref, p_fit)-handles.gamma_ridge_fine');
-        
-        % guess new peak position
-        [dummy, index_peak_max_temp] = max(abs_residual);
+        % Compute the positive residual: locations where the DRT
+        % is still above the current Gaussian fit
+        residual = handles.gamma_ridge_fine' ...
+              - gauss_fct(handles.tau_fine, p_ref, p_fit);
+
+        % Guess the next peak only where an additional positive Gaussian is needed
+        [dummy, index_peak_max_temp] = max(residual);
         peak_value_temp = handles.gamma_ridge_fine(index_peak_max_temp);
         log_tau_mu_temp =  log(handles.tau_fine(index_peak_max_temp));
         if abs(exp(log_tau_mu_temp)-1)<eps
