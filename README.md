@@ -17,7 +17,7 @@ This repository provides an extended and modified version of pyDRTtools in which
 </p>
 
 <p align="center">
-  <img src="tutorial/RCs-Fitting.png" width="600">
+  <img src="docs/RCs-Fitting.png" width="600">
 </p>
 <p align="center">
   RCs Fitting (in Python version).
