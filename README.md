@@ -63,4 +63,4 @@ If you use this software in your research, please cite this GitHub repository us
 https://github.com/MFakouri/DRT-Peak-Analysis-
 
 Please cite the software in any publications or presentations in which it is used.
-Users should also cite the original DRTtools publication referenced in [Ciucci Lab repository] (https://github.com/ciuccislab/DRTtools).
+Users should also cite the original DRTtools publication referenced in [Ciucci Lab repository](https://github.com/ciuccislab/DRTtools).
