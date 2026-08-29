@@ -1,8 +1,8 @@
 # DRT Peak Analysis
 
-> [!WARNING]
+> [!NOTE]
 > **As of August 28, 2026, the MATLAB version is no longer being updated** to allow development efforts to focus on the Python version.  
-> Please download the latest Python release with new features and improvements from [here](YOUR-LINK).
+> Please download the latest Python release with new features and improvements from [here]([YOUR-LINK](https://github.com/MFakouri/pyDRT-Peak-Analysis-)).
 > 
 An integrated MATLAB GUI for EIS data import, Distribution of Relaxation Times (DRT) analysis, peak deconvolution, and automated extraction of peak parameters.
 This repository provides an extended and modified version of pyDRTtools in which data conversion, DRT analysis, peak analysis, and parameter export are integrated into a single GUI.
