@@ -15,6 +15,14 @@ This repository provides an extended and modified version of pyDRTtools in which
 <p align="center">
   DRT peaks.
 </p>
+
+<p align="center">
+  <img src="tutorial/RCs-Fitting.png" width="600">
+</p>
+<p align="center">
+  RCs Fitting (in Python version).
+</p>
+
 ## Main Features
 
 - Direct import of EIS data exported from different instruments, including BioLogic (.mpr), Zahner (.ism), Gamry (.dta), Scribner/ZView/ZPlot (.z), MATLAB (.mat), and generic text/data files (.txt, .csv, .dat).
@@ -31,6 +39,7 @@ This repository provides an extended and modified version of pyDRTtools in which
   - FWHM (Full Width at Half Maximum)
 - Automatic export of the peak parameters to a CSV file.
 - Automatic saving of the resulting figure.
+- CNLS fitting using DRT-derived peak parameters as initial values for the RC elements, with visualization of the measured and fitted Nyquist plots together with the individual RC semicircle contributions (in Python version).
 - Standalone Windows executable available; no Python or MATLAB installation or additional configuration required.
     Download exe file here: https://github.com/MFakouri/pyDRT-Peak-Analysis-/tree/master/Windows-Executable
 
