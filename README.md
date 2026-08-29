@@ -45,24 +45,11 @@ This repository provides an extended and modified version of pyDRTtools in which
 - Automatic saving of the resulting figure.
 - CNLS fitting using DRT-derived peak parameters as initial values for the RC elements, with visualization of the measured and fitted Nyquist plots together with the individual RC semicircle contributions (in Python version).
 - Standalone Windows executable available; no Python or MATLAB installation or additional configuration required.
-    Download exe file here: https://github.com/MFakouri/pyDRT-Peak-Analysis-/tree/master/Windows-Executable
+    Download exe file [here](https://github.com/MFakouri/pyDRT-Peak-Analysis-/tree/master/Windows-Executable)
 
 ## Original DRTtools
 
-This software is based on and extends the original **DRTtools** toolbox developed by the Ciucci Lab.
-
-Original DRTtools repository:
-https://github.com/ciuccislab/DRTtools
-
-pyDRTtools is distributed under the MIT License.
-
-Users are encouraged to cite the primary DRTtools reference:
-
-T. H. Wan, M. Saccoccio, C. Chen, and F. Ciucci,
-“Influence of the discretization methods on the distribution of relaxation times deconvolution: implementing radial basis functions with DRTtools,”
-*Electrochimica Acta*, vol. 184, pp. 483–499, 2015.
-
-https://doi.org/10.1016/j.electacta.2015.09.097
+This software is based on and extends the original **DRTtools** toolbox developed by the [Ciucci Lab](https://github.com/ciuccislab/DRTtools).
 
 ## Contact and Citation
 
@@ -76,4 +63,4 @@ If you use this software in your research, please cite this GitHub repository us
 https://github.com/MFakouri/DRT-Peak-Analysis-
 
 Please cite the software in any publications or presentations in which it is used.
-Users should also cite the original DRTtools publication listed above when appropriate.
+Users should also cite the original DRTtools publication referenced in [Ciucci Lab repository] (https://github.com/ciuccislab/DRTtools).
